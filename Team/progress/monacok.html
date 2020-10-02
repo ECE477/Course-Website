@@ -239,6 +239,60 @@ contact course staff.
                 [2] Y. Zhu, <i>Embedded systems with ARM Cortex-M microcontrollers in assembly language and C Third Edition.</i> E-Man Press LLC, 2018.</p>
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 6:</h4>
+            <b>Date:</b> 2 October 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+            The Sparkfun Transparent OLED Display arrived early last weekend, so I began investigating further into the
+            graphics library provided by Sparkfun and the breakout board schematic. As with the MPU-6050, the resources
+            associated with the Sparkfun TOLED Display use the Arduino environment, including the HyperDisplay library
+            made specifically for Sparkfun display products. The HyperDisplay library, however, utilizes the SSD1309
+            library which supports "display driver IC's without customization for any particular display hardware" [1].
+            So although the HyperDisplay library is incompatible with System Workbench, I have begun experimenting with
+            using the SSD1309 library in conjunction with the HAL library provided by STMicroelectronics to interface
+            with the OLED display.<br><br>
+
+            <table>
+                <tr>
+                    <td style="width: 65%;">As discussed previously, I will be using the SPI interface to communicate with the OLED display. This
+            particular display can accommodate both I2C and SPI protocols with I2C as default. In order to use SPI with
+            the display, 4 jumper connections must be severed on the breakout board. JP1 is connected to the
+            No-Connection (I2C)/Slave Select (SPI) line on the board. The default configuration pulls the Slave Select
+            low. For SPI, the Slave Select signal should only be pulled low when the slave is required by the master.
+            Therefore, this jumper must be severed and the respective GPIO output pin pulled high. In I2C mode, JP2
+            allows the user to change the I2C address from 0x30 (default) to 0x31, but severing this connection also
+            releases the Data-Command pin for use in SPI mode. JP3 is the jumper that designates whether the display is
+            in I2C mode (closed) or SPI mode (opened). Finally, JP4 determines if the SDA (I2C)/MOSI (SPI) pin should
+            be bi-directional. For SPI, Master Out Slave In is a one directional signal, so the jumper should once
+            again be severed. My display breakout board with severed jumper connections is shown on the right.
+                    </td>
+                    <td><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/OLED_Breakout_Jumpers.PNG" style="width: 250px;"><br><b>Figure 14: </b><i>TOLED Jumpers in SPI Configuration</i></p></td>
+                </tr>
+            </table>
+            <br>
+            I used STM32CubeMX to generate the initialization code for the GPIO, SPI, and System Clock registers,
+            downloaded and integrated the SSD1309 library, and wrote a test "Hello World" program to display on the
+            OLED. SPI is not compatible with the Qwiic connectors available on the board, so I used male headers to try
+            and connect the development board to my test bread board. Unfortunately, the connection between the
+            breakout board through holes and the header pins is too loose to provide a solid connection, so I cannot
+            currently test for successful communication with the OLED display.
+            <br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/OLED_Setup.jpg" style="width: 500px;"><br><b>Figure 15: </b><i>TOLED Test Set-up</i></p>
+
+            <br><br>
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Continue working with the Transparent OLED Display to establish communication</li>
+                <li>Finalize the Software Formalization Assignment</li>
+            </ul>
+            <br>
+
+            <b>Sources Cited:</b><br>
+            <p style="line-height: 20px;">[1] GitHub.com. 2020. <i>GitHub, Inc.</i> [online] Available at: &lthttps://github.com/sparkfun/SparkFun_HyperDisplay> [Accessed 30 September 2020].<br>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
