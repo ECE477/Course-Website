@@ -53,7 +53,7 @@ contact course staff.
 		<div id="content">
             <h2>Progress Report for Carrie Kemmet</h2>
 
-            <h4>Week 1:</h4>
+            <h4>Week 2:</h4>
             <b>Date:</b> September 11, 2020<br>
             <b>Total hours:</b> 8:30 <br>
 			<b><br>Description of design efforts:</b><br>
@@ -108,7 +108,7 @@ contact course staff.
             <br>
 		</tr>
 		<br>
-		<h4>Week 2:</h4>
+		<h4>Week 3:</h4>
 		<b>Date:</b> September 18, 2020<br>
 		<b>Total hours:</b> 10:00 <br>
 		<b><br>Description of design efforts:</b>
@@ -146,7 +146,7 @@ contact course staff.
 			</div>
 		<br><b>Figure 2: </b><i>My simplified schematic (left), the coulomb counter complete schematic [9] (center), and the regulator schematic [10] (right)</i></b>
 		<br><br>
-		<h4>Week 3:</h4>
+		<h4>Week 4:</h4>
 		<b>Date:</b> September 25, 2020<br>
 		<b>Total hours:</b> 6:00 <br>
 		<b><br>Description of design efforts:</b>
@@ -169,12 +169,57 @@ contact course staff.
 		<br>
 		<div class="fruitbowl">
 			<div class="apple"><a href="../img/ckemmet_progress/transceiver_wifi.jpg">
-			<img src="../img/ckemmet_progress/transceiver_wifi.jpg" style="width: 250px;padding-right: 20px;" alt="Apple" /></a>
+			<img src="../img/ckemmet_progress/transceiver_wifi.jpg" style="height: 250px;padding-right: 20px;" alt="Apple" /></a>
 			<a href="../img/ckemmet_progress/Uno.jpg">
-			<img src="../img/ckemmet_progress/Uno.jpg"  style="width: 250px;padding-right: 20px;" alt="Apple" /></a>
+			<img src="../img/ckemmet_progress/Uno.jpg"  style="height: 250px;padding-right: 20px;" alt="Apple" /></a>
 			</div>
 		<br><b>Figure 1: </b><i>Radio transciever module (left), and Arduino Uno (right) setups</i></b>
+		
 		<br><br>
+		<h4>Week 5:</h4>
+		<b>Date:</b> October 2, 2020<br>
+		<b>Total hours:</b> 12:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		<table>
+			<tr><td>
+				This week, the schematic took up the majority of my time. I was in charge of 
+				power circuitry for the schematic including the charging circuit, the battery gauge, the battery, and the voltage regulators, as well as the LoRa transceiver system
+				and part of the microcontroller. In addition to this, I coordinated the effort among my teammates and delegated the design of the IMU, GPS, and OLED. I then synthesized
+				all of the information into a single draft.<br><br>
+		
+				There was a learning curve to using kicad, but most of my time was spent referencing datasheets to check out sample schematics and connections for each 
+				system. I also had to use lookup tables to modify the system for our application. For example, the capacitor values on the voltage regulators determine their output voltage
+				and were different for 1.8 volts and 3.3 volts. I also had to make sure all of the appropriate connectors were in place. <br><br>
+			</td>			
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/Schematic.png">	
+				<img src="../img/ckemmet_progress/Schematic.png" style="height: 250px;"><br><b>Figure 1: </b><i>Completed schematic draft</i></b></td>
+			</a>
+
+			</tr>
+		</table>
+
+		There is still a little bit of work I would like to get done on the schematic. I want to add headers to ensure that we can correctly program the device and switch out the
+		charging circuit for a separate charging module, which would be a lot simpler. We could select one that is specific to the battery as well to avoid complications (ie: 
+		explosions).<br><br>
+		<br>
+		<div class="fruitbowl">
+			<div class="apple"><a href="../img/ckemmet_progress/LoRaSchematic.png">
+			<img src="../img/ckemmet_progress/LoRaSchematic.png" style="height: 150px;padding-right: 20px;" alt="Apple" /></a>
+			<a href="../img/ckemmet_progress/BatteryGaugeSchematic.png">
+			<img src="../img/ckemmet_progress/BatteryGaugeSchematic.png"  style="height: 150px;padding-right: 20px;" alt="Apple" /></a>
+			<a href="../img/ckemmet_progress/LDOSchematic.png">
+			<img src="../img/ckemmet_progress/LDOSchematic.png"  style="height: 150px;" alt="Apple" /></a>
+			<a href="../img/ckemmet_progress/ChargingCircuitSchematic.png">
+			<img src="../img/ckemmet_progress/ChargingCircuitSchematic.png"  style="height: 150px;" alt="Apple" /></div></a>
+			</div>
+		<br><b>Figure 2: </b><i>A collection of the individual components that I drafted the schematic for.</i></b>
+		<br><br>
+		On a separate note, I got the LoRa transceiver chip to <a href="https://youtu.be/aN5tGtcurM4">work</a>. It turns out that I referencing the wrong port the entire time and my driver was fine. So it goes. 
+
+		<br><br><br>
 
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
