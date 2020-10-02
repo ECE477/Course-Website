@@ -155,12 +155,69 @@ contact course staff.
 				minimize this as much as possible.
 			</td>
 			<br><br>
+			<h4>Week 4:</h4>
+			<b>Date:</b> 10-2-2020<br>
+			<b>Total hours: </b>10<br>
+			<b>Description of design efforts:</b><br>
+			<td>This week I worked more with the GPS module using Arduino. After getting the GPS to connect last week I wanted to verify that I was properly 
+				utilizing the GPS module and receiving accurate information. For the project it is important that the GPS provides accurate location information 
+				and updates itself quickly. Most people who use their phone for navigation, including myself, have probably experienced the annoyance of their 
+				GPS location on screen lagging behind their actual location. I had a friend drive around to assess the accuracy of the readings I was getting from 
+				the GPS as I changed location. We stopped outside of Igloo Frozen Custard in West Lafayette to check coordinate and altitude data.<br><br> 
+				The actual location data for this point is: <br>
+
+				<b>Latitude: </b>40.3680<br>
+				<b>Longitude: </b>-86.8755<br>
+				<b>Altitude: </b>193m [6]<br><br>
+
+				And the reported GPS data was:<br>
+				<b>Latitude: </b>40.3678<br>
+				<b>Longitude: </b>-86.8742<br>
+				<b>Altitude: </b>195.1<br><br>
+
+				Considering I took the measurements from the parking lot and could not go inside for the most accurate results, these numbers are quite 
+				acceptable. I configured the GPS to print an update on its current state every second and noticed that while the coordinates remained consistent, 
+				the altitude data would change a bit each time but remained within about two meters of the target value. For the future, I think altitude may need 
+				to be calculated as the average of several measurements. <br><br>
+
+				I also wanted to make sure that the GPS was not lagging as it reported data. This would have been difficult to test using purely coordinate data 
+				because I didn't know what my coordinates should have been at every data point. I also didn't trust that comparing to another GPS would be 
+				guarantee unbiased results. I instead used speed as the metric to verify that the GPS was updating fast enough. In a car it was very easy to 
+				check the correct speed by looking at the odometer. While driving around, I quickly found out that the GPS was giving speed in knots and made that
+				adjustment to my code. <br><br>
+
+				Below is some footage from the excursion that shows the GPS in action. The first video in Figure 1 shows the location data from Igloo and Figure 3 
+				shows the car's odometer compared to the GPS output. Figures 2 and 4 show screenshots from the videos to more easily read the data.<br><br>
+			</td>
+			<table align="center">		
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="400" controls>
+						<source src="../img/sumner3_progress/GPS_Location_Test.mp4" type=video/mp4>
+					</video> <br><b><u>Figure 1: GPS Location Verification</u></b>
+				</td>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPS_Location_SS.jpg" style="width: 400px;"><br><b><u>Figure 2: GPS Data Captured From Arduino Serial Monitor</u></b>
+					<br>
+				</td>
+			</table><br>
+			<table align="center">		
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="400" controls>
+						<source src="../img/sumner3_progress/GPS_Speed_Test.MOV" type=video/mp4>
+					</video> <br><b><u>Figure 3: GPS Speed Verification</u></b>
+				</td>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPS_Speed_SS.jpg" style="width: 400px;"><br><b><u>Figure 4: GPS Data Captured From Arduino Serial Monitor</u></b>
+					<br>
+				</td>
+			</table><br>
 			<b>Sources Cited:</b><br>
-			<p style="line-height: 20px;">[1] Learn.SparkFun.com. 2020. sparkfun. [online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
-				[2] Adafruit.com. 2020. Adafruit Industries. [online] Available at: &lthttps://www.adafruit.com/product/790> [Accessed 8 September 2020].<br>
-				[3] Adafruit.com. 2020. Adafruit Industries. [online] Available at: &lthttps://www.adafruit.com/product/746> [Accessed 15 September 2020].<br>
-				[4] GitHub.com. 2020. GitHub, inc. [online] Available at: &lthttps://github.com/adafruit/Adafruit_GPS> [Accessed 16 September 2020]. <br>
-				[5] GPSInformation.org. 2020. GPS Information. [online] Available at: &lthttps://www.gpsinformation.org/dale/nmea.htm#intro> [Accessed 16 September 2020]. <br>
+			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
+				[2] "Ultimate GPS Module," Adafruit Industries. 2020. [Online] Available at: &lthttps://www.adafruit.com/product/790> [Accessed 8 September 2020].<br>
+				[3] "Adafruit Ultiamte GPS Breakout," Adafruit Industries. 2020. [Online] Available at: &lthttps://www.adafruit.com/product/746> [Accessed 15 September 2020].<br>
+				[4] "Adafruit_GPS," GitHub. 2020. [Online] Available at: &lthttps://github.com/adafruit/Adafruit_GPS> [Accessed 16 September 2020]. <br>
+				[5] "NMEA Data," GPSInformation.org. [Online] Available at: &lthttps://www.gpsinformation.org/dale/nmea.htm#intro> [Accessed 16 September 2020]. <br>
+				[6] "Find Google Maps Coordinates," mapcoordiantes.net [Online] Available at: &lthttps://www.mapcoordinates.net/en> [Accessed 2 October 2020]. <br>  
 			</p>
         </div>
 
