@@ -219,8 +219,35 @@ contact course staff.
 		<br><br>
 		On a separate note, I got the LoRa transceiver chip to <a href="https://youtu.be/aN5tGtcurM4">work</a>. It turns out that I was referencing the wrong port the entire time and my driver was fine. So it goes. 
 
-		<br><br><br>
+		<br><br>
+		<h4>Week 6:</h4>
+		<b>Date:</b> October 2, 2020<br>
+		<b>Total hours:</b> 10:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+		The team spent the week getting the first draft of the PCB ready to show course staff during our Thursday meeting. The design review is on Tuesday, so a lot of our efforts are going towards
+		collecting all of our data and information in a central location. The schematic ended up needing a lot of work this week, despite its deceptive appearance of being almost completed the week
+		before. Leadership of the project transferred from me to Mitchell, and he gets major credit for spearheading the effort to polish our schematic and to get it ready for transfer to a PCB. Of 
+		course, the finished product was a team effort as always.<br><br>
 
+		<table>
+			<tr><td>
+				I helped out primarily with collecting footprint libraries and verifying component appropriateness for a lot of the system. I selected a connector for the LoRa and GPS antennas, and did
+				calculations for various values in the schematic, such as series resistors for the LED's. I also did more research into modules for the system, specifically the Battery Babysitter. I added a 
+				voltage regulator circuit to further protect the system. In selecting the voltage regulator, I ensured that the power consumption would not lead to overheating using the chip's thermal
+				resistance, and that the output current would be appropriate for our application using the currents listed in the electrical overview assignment. The voltage drop is 400 mV maximum which is 
+				the ideal drop considering that the battery output is 3.7V and the circuit requires 3.3V.</td>	</div></td><td>		
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/regulator_footprint.png">	
+				<img src="../img/ckemmet_progress/regulator_footprint.png" style="height: 100px;"><br><b>Figure 1: </b><i>Voltage regulator footprint</i></b></td>
+			</a>
+			
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<a href="../img/ckemmet_progress/regulator_cad.png">	
+					<img src="../img/ckemmet_progress/regulator_cad.png" style="height: 100px;"><br><b>Figure 2: </b><i>Voltage regulator model</i></b></td>
+			</tr>
+		</table>
+		<br><br>
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
