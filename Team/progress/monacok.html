@@ -293,6 +293,50 @@ contact course staff.
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
 
+            <h4>Week 7:</h4>
+            <b>Date:</b> 9 October 2020<br>
+            <b>Total hours:</b> 12<br>
+            <b>Description of design efforts:</b><br><br>
+            My main goal this week was to be able to display text on the Sparkfun Graphical Transparent OLED Display.
+            As stated previously, one major factor that hindered my progress was the lack of proper connections between
+            the breakout board pins and the microcontroller. Also, up until this week I have been trying to communicate
+            with the OLED via SPI which requires further alteration of the OLED's breakout board. The absence of any
+            visual response from the OLED the past couple weeks has been frustrating to say the least. During my
+            debugging process I considered various reasons as to why the OLED was not responding to the code. Improper
+            connections to the pins was always a concern as well as the possibility that the jumpers were not
+            completely severed to set the breakout board to work with the SPI interface. I also considered the
+            possibility that when altering the ssd1306 library to work with SPI vs I2C I had made some error during the
+            configuration process, or I was simply using the library incorrectly. Finally, there was the possibility
+            that the OLED was faulty or damaged in transport. After many failed attempts at solving these issues
+            through software (re-configuring the library and re-writing code), I finally decided to take a step back
+            and approach the problem differently. From my first progress report, I was set on using SPI to program
+            the OLED display; however, the breakout board, ssd1306 library, and display itself are primarily configured
+            for communication with I2C. I re-connected the OLED display to the microcontroller, this time using a Qwiic
+            connector. I re-configured the library once more to communicate with I2C and re-wrote my code accordingly.
+            Needless to say, I was overjoyed with the results.<br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/OLED_I2C.jpg" style="width: 300px;"><br><b>Figure 16: </b><i>TOLED Display using I2C</i></p><br>
+            After successfully displaying text, digits, and graphics on the OLED display using I2C, I began experimenting with
+            the Internal Temperature Sensor on the STM32L476VGT chip which generates a voltage that varies linearly
+            with temperature. The sensor is connected to the microcontroller's ADC1 Channel which converts the output
+            voltage value of the sensor to a digital value. Each chip is individually factory-calibrated with two
+            calibration values measured at 30 degrees celsius and 110 degrees celsius. These values are stored in the
+            chip at set memory addresses given by the datasheet.
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/tempSensor_CalibVals.PNG" style="width: 500px;"><br><b>Figure 17: </b><i>STM32L4 Temperature Sensor Calibration Value Address Table</i></p><br>
+            Using these values, STMicroelectronics provides the following formula for calculating the approximate ambient temperature in degrees Celsius.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/tempSensor_Formula.PNG" style="width: 500px;"><br><b>Figure 18: </b><i>STM32L4 Temperature Sensor Formula</i></p><br>
+            <br>
+            Testing resulted in a temperature measurement of 30 degrees Celsius, or 86 degrees Fahrenheit. The A/C unit
+            in my room measured the room temperature at 72 degrees Fahrenheit. The difference between the two values
+            may be due to the chip being warmer than the surroundings; however, this inaccuracy may cause our team to
+            prefer the temperature sensor outputs of our other components depending on their accuracy.
+
+            <br><br>
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Midterm Design Review</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
