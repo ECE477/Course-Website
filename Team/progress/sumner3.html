@@ -216,23 +216,36 @@ contact course staff.
 			<b>Date:</b> 10-9-2020<br>
 			<b>Total hours:</b> 8<br>
 			<b>Description of design efforts:</b><br>
-			<td>
-			
-				Continuing with the GPS module, this week my goal was to move on from the Arduino IDE and implement a physical trigger to request data from 
+			<td>Continuing with the GPS module, this week my goal was to move on from the Arduino IDE and implement a physical trigger to request data from 
 				the GPS. I had hoped to get the module working with our STM32 microcontroller this week, but it unfortunately arrived too late for me to use it 
 				this week. Instead I used an ESP32 feather board with Micropython. With the Arduino I couldn't connect any other hardware in addition to the GPS
 				without causing it to lose functionality. The module would continue to communicate with the Arduino but would always lose its satellite signal. 
 				Using the ESP32 got rid of this issue and I integrated a push button to trigger the GPS request. In the final project, there will be a button 
-				that the user will be able to push to request the GPS data of a buddy nearby.
+				that the user will be able to push to request the GPS data of a buddy nearby.<br><br>
 
 				The GPS module uses UART to connect to the microcontroller. Once it has acquired a satellite connection, it can begin to send transmit data. The 
 				data has to be parsed into data arrays. There are several types of NMEA senteces that the module will transmit that contain different assortments 
 				of data. For our purposes, all of the necessary data can be pulled from just two types, which simplifies things. Sentences are structured as a 
-				comma separated list, making it easy to split apart. 
+				comma separated list, making it easy to split apart. <br><br>
 
-			<br>The next step is to actually use the STM32 microcontroller for the GPS implementation. I will be using the same hardware design with a push button 
-				to request data from the GPS. I anticipate that parsing will be more tedious moving from Python to C, but the process should go smoothly.
-			</td><br>
+				I also updated our product CAD model this week. As we have progressed further in the process of desiging our PCB, there were some physical changes 
+				to account for. Originally we were going to use two user push buttons for the on/off switch and the GPS trigger. While designing the PCB we decided 
+				to change the power button to a dip switch. The dimensions and general layout also changed through this process, so the size and positioning of the 
+				user interface was also adjusted. <br><br>
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/CAD_Progress.jpg" style="width: 400px;"><br><b><u>Figure 1: CAD model progress</u></b>
+					<br>
+				</td>
+			</table>
+			<td>With the model, there are still a couple things left to figure out that have changed since the original model. We're now using a different radio 
+				chip and antenna and will be adding that back to the model once the kind of antenna is decided on. The placement of the OLED may also change but 
+				more prototyping is needed before determening its final placement.<br><br>
+				
+				The next step for me is to actually use the STM32 microcontroller for the GPS implementation. I will be using the same hardware design with a push button 
+				to request data from the GPS. I anticipate that parsing to be more tedious moving from Python to C, but the process will hopefully go smoothly. 
+			</td><br><br>
 			<b>Sources Cited:</b><br>
 			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
 				[2] "Ultimate GPS Module," Adafruit Industries. 2020. [Online] Available at: &lthttps://www.adafruit.com/product/790> [Accessed 8 September 2020].<br>
