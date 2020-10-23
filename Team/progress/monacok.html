@@ -337,6 +337,60 @@ contact course staff.
             </ul>
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 9:</h4>
+            <b>Date:</b> 23 October 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+
+            The majority of this week's focus was on making corrections to our Schematic based on our Midterm Review
+            feedback. I first added a note to our schematic indicating that our team intends to use software pull-ups
+            for our I2C lines. This was later redacted, and, although we still intend to use software pull-ups, I
+            placed physical pull-up resistors on the schematic to reduce the risk of overloading the software pull-up's
+            respective transistors.<br><br>
+            Next, I re-calculated the heat dissipation of our LT1129 Voltage Regulator to determine whether we would
+            require a heat sink on our PCB and, if so, the thermal resistance required. The LT1129 Datasheet provides
+            the following formula for calculating the voltage regulator's power dissipation:<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/LT1129_Heat_Formula.PNG" style="width: 300px;"><br><b>Figure 19: </b><i>LT1129 Power Dissipation Formula</i></p><br>
+            Our maximum output current for the component is approximately 0.38A which was found by summing the current
+            draw for each individual component, the values of which are summarized in the following chart taken from
+            our Electrical Overview document.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/ElecSpec_Overview.PNG" style="width: 400px;"><br><b>Figure 20: </b><i>Component Electrical Specifications Overview</i></p><br>
+            The maximum input voltage that could be sent to the regulator by the Battery Babysitter is under 4V as the
+            input to the Babysitter is a 3.7V Lithium Ion Battery. Our desired output voltage is 3.3V and the Ground
+            Pin Current is 0.02A as estimated from Figure 21 taken from the LT1129 datasheet. These values result in a
+            power dissipation of 0.345W. The Thermal Resistance of the component is about 60 degrees celsius per Watt
+            as estimated from Figure 22 taken from the LT1129 datasheet. The components power dissipation multiplied by
+            its thermal resistance gives the temperature rise above ambient. This value added to the assumed ambient
+            temperature of 25 degrees Celsius results in a maximum component temperature of 45.7 degrees Celsius.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/LT1129_GNDPin_Current.PNG" style="width: 200px;"><img src="../img/monacok_progress/LT1129_Heat_Chart.PNG" style="width: 400px; padding-left: 100px;"><br><b>Figure 21: </b><i>LT1129 Ground Pin Current</i><b style="padding-left: 250px;">Figure 22: </b><i>LT1129 Thermal Resistance Chart</i></p><br>
+            <table>
+                <tr>
+                    <td>While 45.7C is within our desired maximum temperature of 50C, I researched an inexpensive, easy-to-use, slip-on heat sink to be used if needed (Aavid Slide On 5801).</td>
+                    <td><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Aavid5801.PNG" style="width: 100px;"><br><b>Figure 23: </b><i>Aavid 5801 Slip-On Heat Sink</i></p><br></td>
+                </tr>
+            </table>
+            Our GPS Module is extremely low-power; however, the component does have a tight constraint for the
+            allowable input voltage ripple. To ensure the voltage input ripple is within spec, I looked into another
+            voltage regulator with minimal voltage dropout and adequate ripple rejection rating. I decided on the
+            TC2054 voltage regulator because it provides a dropout voltage less than 25mA for the current load of the
+            GPS module and has a typical power supply rejection rating (PSRR) of 50dB, which is more than enough for
+            our application. Since we are powering our device with a battery, the voltage ripple will likely be
+            negligible, so we will initially short the extra voltage regulator's Vin to Vout; however, if the Vin trace
+            picks up noise due to its proximity to another trace such as the SPI clock, the extra voltage regulator can
+            be used to reduce the voltage ripple.
+
+            <br><br>
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Design Home Screen</li>
+                <li>Continue working on Software Development</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+
+
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
