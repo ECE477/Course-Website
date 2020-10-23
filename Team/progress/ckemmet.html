@@ -248,6 +248,33 @@ contact course staff.
 			</tr>
 		</table>
 		<br><br>
+
+		<h4>Week 9:</h4>
+		<b>Date:</b> October 23, 2020<br>
+		<b>Total hours:</b> 5:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		<table>
+			<tr><td>
+			This week, I spent a few hours working with the battery babysitter, Li-Ion battery, and the STM32l4. This was my first time interfacing with the L4 and so
+			setting up the environment and verifying proper functionality took some time. It paid off in the long run as development using STMCube was relatively easy,
+			and the included drivers come in handy as well.<br>
+			The first thing I did was get the battery charging correctly. I selected an input current of 100 mA and was able to successfully start charging the Li-Ion
+			battery. This was verified with the on-board blue LED on the batter babysitter. The datasheet claimed that it indicates successful charge. <br>
+			Next, I configured the I2C and LCD on the STM32L476G Discovery board. The LCD took quite a bit of finnagling and a call to Kennedy, but I eventually got it
+			working well enough to be able to tell that my I2C communication wasn't working at all.<br>
+			It's difficult to debug a signaling issue such as I2C outside of the lab, but I suspect that it's a problem with read/write data and not the firmware. The
+			firmware implementation closely follows the suggestions in STM32 source code. I am using the correct address and also am pretty sure that the requests and 
+			registers are accurate as well. I am currently consulting the bq27441-G1 fuel gauge datasheet to diagnose and fix the issue, but as of right now, I am not
+			 able to read registers on the battery babysitter yet.
+			</td>	</div></td><td>		
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/babysitter.jpg">	
+				<img src="../img/ckemmet_progress/babysitter.jpg" style="height: 400px;"><br><b>Figure 1: </b><i>Battery Babysitter, STM32, and Li-Ion battery</i></b></td>
+			</tr>
+		</table>
+
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
