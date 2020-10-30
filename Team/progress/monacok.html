@@ -389,8 +389,40 @@ contact course staff.
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
 
+            <h4>Week 10:</h4>
+            <b>Date:</b> 30 October 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
 
+            This week I finished creating the Home Screen design for the Snow-weAR Goggles Transparent OLED Display and
+            created a function to display the design. The design consists of a logo depicting snow goggles reflecting
+            the view of a mountain range and the product name. In order to display the logo, I first had to determine the coordinate values
+            of the black pixels in the logo. Using a python script, I resized the logo image to better fit the 56x128
+            display, then I used the numpy library to extract the coordinate values of pixels whose values were below a
+            defined threshold value. The thershold value was adjusted until all of the desired pixels were selected by
+            the program. The coordinate values were then saved into a separate file where I could copy the points over
+            to system workbench. Finally, I looped through all of the x, y coordinates and used the DrawPixel library
+            function to display the final logo on the OLED Display. The name of the product is displayed one character
+            at a time with 0.1s delay between updates to create animation. The final design is shown below.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/OLED_Logo.jpg" style="width: 300px;"><br><b>Figure 24: </b><i>Snow-weAR Home Screen</i></p><br>
 
+            Towards the end of the week I began working with one of our Battery Babysitter modules to figure out how to
+            communicate with the on board Fuel Gauge to retrieve current battery level status. I was able to find a
+            github repository that had taken the BQ27441 Arduino library and converted the files into a C compatible
+            library. I added the C library files to our project software and have begun working with the library.
+            Unfortunately, I have been unable to communicate with the Battery Babysitter using the original C library;
+            however, I am now attempting to edit the library to use HAL I2C interfacing to see whether that will solve
+            the communication issues. I have high hopes that I will be able to obtain the required information from the module
+            in the upcoming week.<br><br>
+
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Setup.jpg" style="width: 300px;"><br><b>Figure 25: </b><i>Battery Babysitter Test Set-up</i></p><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Communicate with Battery Babysitter</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
