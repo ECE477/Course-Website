@@ -275,6 +275,34 @@ contact course staff.
 			</tr>
 		</table>
 
+		<h4>Week 10:</h4>
+		<b>Date:</b> October 30, 2020<br>
+		<b>Total hours:</b> 15:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		<table>
+			<tr><td>
+			TI split my week between working with interfacing the battery babysitter (BQ27441) and the RFM95W module (SX1276) with the STM32 discovery board. I was 
+			unable to achieve success with either. For the battery babysitter, I first verified successful charging and discharging and then I began by reviewing the
+			 datasheet for any information relating to I2C protocol with the device. I then configured the STM32 I2C pins. I have been using the internal pullup resistors
+			 on the STM32, but next week I'm going to try with extermal 4.7kOhm resistors per the datasheet, and see if that helps. I then spent a lot of time trying to
+			 establish communcation with the device by successfully requesting data from the DEVICE_TYPE register. I verified this by using the on-board LCD.  I was unable
+			 to detect any successful signal. The development with the SX1276 chip went similarly except that I was using SPI, and I was more successful in finding Arduino 
+			 libraries for the application
+			</td>	</div></td><td>		
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/RFM95W.jpg">	
+				<img src="../img/ckemmet_progress/RFM95W.jpg" style="height: 200px;"><br><b>Figure 1: </b><i>FRM95W with STM32 Discovery Board</i></b></td>
+			</tr>
+		</table>
+		<br>
+		Miscellanious: <br>
+		I did a lot of tasks this week that, while pretty small alone, took up enough of my time that they're worth mentioning here. I printed off a 1:1 draft of the PCB
+		and verified that the battery babysitter pins will line up with the headers on the PCB. I also picked up some supplies from the lab and soldered headers onto my
+		RFM95W chip, so hopefully the connections will be more reliable in the future. I don't know if that was the issue or not, but it will be good to have that 
+		possibility ruled out.
+		<br><br>
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
