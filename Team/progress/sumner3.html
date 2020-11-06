@@ -307,6 +307,29 @@ contact course staff.
 				I'll keep trying to debug the issue over the weekend and if I'm still stuck my next step will be to find a time to go to office hours
 				next week. While searching the internet for a solution I found a potentially useful library for parsing the GPS data that would make my
 				life a lot easier once I am getting data [7]. 
+			</td>
+			<h4>Week 11:</h4>
+			<b>Date:</b> 11-6-2020<br>
+			<b>Total Hours:</b> 12<br>
+			<b>Description of design effors:</b><br>
+			<td>I was able to move through the roadblock last week working with the GPS and STM32. It took a few days for me to get components to 
+				communicate again and I'm not sure if there was just one issue or a combination of things. I changed several things in the debugging process 
+				and the issues were mainly with the code generated using the STMCubeMX software. Some of the HAL configuration files were setup incorrectly 
+				so I went through those and fixed the USART relevant functions. At one point I was also getting an error "Failed to execute MI command: -var 
+				create-" after changing nothing in my code. This ended up being a hardware malfunction with the board that was solved by rebooting and running 
+				my code with all the 'meat' commented out. Then I added it back in was able to run it fine.
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/SystemWorkbench_GPS_Polling_Data.jpg" style="width: 900px;"><br><b><u>Figure 1: Variable showing polled USART GPS data </u></b><br><br>
+				</td>
+			</table>
+			<td>Pictured above is a line of data captured from the GPS using UART polling. Before I was using functions from a GPS compatible library to do 
+				most of the data parsing, but to keep things simple I'm going to create my own parsing functions. At the moment I can only receive one line of 
+				data with each run, which will be the first thing I look into to fix into the weekend. To keep things simple, I'll also be creating my own 
+				functions for parsing instead of using library assistance as before. This will also be done soon because my teammates have also had success 
+				with their individual components and we need to start integrating them together. 
+			</td>
 			<br><br>
 			<b>Sources Cited:</b><br>
 			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
