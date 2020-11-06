@@ -423,6 +423,56 @@ contact course staff.
             </ul>
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 11:</h4>
+            <b>Date:</b> 6 November 2020<br>
+            <b>Total hours:</b> 10<br>
+            <b>Description of design efforts:</b><br><br>
+
+            After unsuccessful attempts at communicating with the Battery Babysitter Fuel Gauge, I attended Todd Wild's
+            office hours and learned how to properly read and write I2C messages using the Protocol tab of the WaveForm
+            application with the Analog Discovery 2 (AD2). Using the AD2, I later attempted to determine the correct
+            command to send to the device to retrieve the Battery Babysitter's Fuel Gauge "Device Type" value. According
+            to the Battery Fuel Gauge Technical Reference Manual, the Device Type can be obtained by writing a
+            subcommand to the Control Register which will cause the device to then write the Device Type to the Control
+            Register address to be read by the Master. The Control Register has address 0x00 and 0x01 while the
+            subcommand for obtaining the Device Type is 0x0001 as shown in the portion of the Reference Manual included
+            below.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_DeviceTypeManual.jpg" style="width: 700px;"><br><b>Figure 26: </b><i>Battery Babysitter Fuel Gauge Technical Reference Manual Control Register</i></p><br>
+
+            After sending the Device Type subcommand to the Control Register, the Fuel Gauge returns the value 0x0421
+            (the default Device Type Value) to 0x00 and 0x01. Unfortunately, I was unable to receive the correct Device
+            Type value for the majority of this week using the AD2. In fact, it seemed that each time I wrote to the
+            Control Register, I received different values almost every time. I then decided to try logging the I2C
+            messages to see what my current C code was sending to the Battery Babysitter for comparison. I realized
+            that the reason I was not receiving the correct output when sending I2C messages from the AD2 was that I
+            was using big endian format while the Battery Babysitter (and the HAL I2C function I was using) used little
+            endian. Finally, I discovered that my use of the HAL Library function was also wrong in the fact that I was
+            sending too many bytes to the Fuel Gauge register. After researching more into the HAL library,
+            which I intend to actually use to communicate with the Battery Babysitter via the STM32, I came across a
+            discussion that suggested using the parameter I2C_MEMADD_SIZE_8BIT for the Memory Address variable in the
+            HAL function HAL_I2C_Mem_Write(). The following AD2 Log snippet shows the results of this minor fix.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/AD2_Log.jpg" style="width: 500px;"><br><b>Figure 27: </b><i>Correct Device Type Value received from Battery Babysitter Fuel Gauge logged with WaveForms using an AD2</i></p><br>
+
+            Once I was positive I could correctly connect to and communicate with the Battery Babysitter Fuel Gauge, I
+            adapted more of the C library (derived from the BQ27441 Arduino library) to correctly read the LiPo Battery
+            Voltage, Capacity Status, and Temperature Sensor values. These read functions and all other communication
+            can now be easily implemented with the I2C read/write functions I created using the HAL Library.<br><br>
+
+            Below are two images showing more results from the Battery Babysitter Fuel Gauge communication testing.<br><br>
+
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td style="padding-right: 120px;"><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Voltage.jpg" style="height: 400px;"><br><b>Figure 28: </b><i>OLED Display indicates proper connection to the <br>Battery Babysitter and reports the LiPo Battery Voltage</i></p><br></td>
+                    <td><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Output.jpg" style="height: 400px;"><br><b>Figure 29: </b><i>Voltage Supply output of the Battery Babysitter<br>measured with DMM</i></p><br></td>
+                </tr>
+            </table>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Begin testing and construction of PCB</li>
+            </ul>
+
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
