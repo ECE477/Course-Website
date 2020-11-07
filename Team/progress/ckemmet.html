@@ -283,7 +283,7 @@ contact course staff.
 
 		<table>
 			<tr><td>
-			TI split my week between working with interfacing the battery babysitter (BQ27441) and the RFM95W module (SX1276) with the STM32 discovery board. I was 
+			I split my week between working with interfacing the battery babysitter (BQ27441) and the RFM95W module (SX1276) with the STM32 discovery board. I was 
 			unable to achieve success with either. For the battery babysitter, I first verified successful charging and discharging and then I began by reviewing the
 			 datasheet for any information relating to I2C protocol with the device. I then configured the STM32 I2C pins. I have been using the internal pullup resistors
 			 on the STM32, but next week I'm going to try with extermal 4.7kOhm resistors per the datasheet, and see if that helps. I then spent a lot of time trying to
@@ -293,7 +293,7 @@ contact course staff.
 			</td>	</div></td><td>		
 			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
 				<a href="../img/ckemmet_progress/RFM95W.jpg">	
-				<img src="../img/ckemmet_progress/RFM95W.jpg" style="height: 200px;"><br><b>Figure 1: </b><i>FRM95W with STM32 Discovery Board</i></b></td>
+				<img src="../img/ckemmet_progress/RFM95W.jpg" style="height: 200px;"><br><b>Figure 1: </b><i>RFM95W with STM32 Discovery Board</i></b></td>
 			</tr>
 		</table>
 		<br>
@@ -303,6 +303,34 @@ contact course staff.
 		RFM95W chip, so hopefully the connections will be more reliable in the future. I don't know if that was the issue or not, but it will be good to have that 
 		possibility ruled out.
 		<br><br>
+
+		<h4>Week 11:</h4>
+		<b>Date:</b> November 6, 2020<br>
+		<b>Total hours:</b> 10:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+		
+		<table>
+			<tr><td>
+			This week was dedicated to establishing communication with the LoRa transceiver module (RFM95W) via SPI protocol. Basic communcation was achieved, with the help 
+			of the ADALM2000 digital oscilliscope and Todd's office hours. After a few more hours wrestling with the HAL library, I ended up going back to square one and 
+			directly configuring the registers and parameters for SPI through the STMCubeIDE, using the L4 family reference manual. This was the first time I was able to get 
+			a decent clock signal, and after connecting the (newly soldered) transceiver module, I was able to verify the transmission and reception of bytes from the STM32L476 
+			Discovery Board. Pictured is a read request from register 2 of the SX1276 (the chip on the RFM95W) and the response which was verified with the data sheet. <br>
+			Next week, we'll start soldering the PCB. I plan on developing a robust LoRa library and then integrating it with Peter's GPS and maybe even Kennedy's OLED display 
+			(via breadboard, probably not on the PCB yet). 
+			</td>	</div>
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/SimpleSPI.jpg">	
+				<img src="../img/ckemmet_progress/SimpleSPI.jpg" style="height: 250px;"><br><b>Figure 1: </b><i>Successful SPI Transmit (1st byte) and Receive (2nd byte)</i></b></td>
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/SPISetup.jpg">	
+				<img src="../img/ckemmet_progress/SPISetup.jpg" style="height: 250px;"><br><b>Figure 1: </b><i>RFM95W with STM32 Discovery Board, Soldered Edition</i></b></td>
+			</tr>
+		</table>
+		<br><br>
+
+
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
