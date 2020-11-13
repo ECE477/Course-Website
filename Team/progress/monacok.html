@@ -473,6 +473,33 @@ contact course staff.
                 <li>Begin testing and construction of PCB</li>
             </ul>
 
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 12:</h4>
+            <b>Date:</b> 13 November 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+
+            My first goal this week was to finish adapting the Battery Babysitter Fuel Gauge library for our project.
+            All functions and declarations have been successfully imported into our project as a single source file and
+            two header files. The functions defined in the source file can be easily called by the main program and
+            their return values displayed to the OLED with little to no extra calculations. Some formatting is required
+            to neatly show float values such as that of the Battery Babysitter Voltage reading.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_CodeExample.jpg" style="width: 500px;"><br><b>Figure 30: </b><i>Reading Battery Voltage and Temperature then displaying the values of the Transparent OLED Display</i></p><br>
+
+            I was also able to work briefly with Mitchell to integrate the IMU code with the Battery Babysitter and
+            OLED display. Fortunately, the IMU and OLED breakout boards both have Qwiic connector ports, so the two
+            components can be daisy-chained on the same I2C line for simple wiring.
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Qwiic_Daisy.jpg" style="width: 400px;"><br><b>Figure 31: </b><i>Qwiic Connectors Daisy Chain Example (Actual set-up image not currently available)</i></p><br>
+
+            Finally, I practiced soldering jumper pads and some fly wiring to re-configure one of our OLED displays for
+            I2C and to test a voltage regulator component with my breadboard set-up. I did not get the chance to
+            photograph this process.<br><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Testing and construction of PCB</li>
+            </ul>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
