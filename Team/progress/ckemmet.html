@@ -330,7 +330,30 @@ contact course staff.
 		</table>
 		<br><br>
 
+		<h4>Week 12:</h4>
+		<b>Date:</b> November 13, 2020<br>
+		<b>Total hours:</b> 8:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+		
+		This week, I was in charge of the Environmental and Ethical Analysis as well as continuing development with the LoRa transceiver module. The anaylsis is worth 
+		mentioning, even though it doesn't count as part of my 'progress' for this report. I really enjoyed researching the implications our project has for both the 
+		planet and the skiing experience. I learned that there really aren't that many in-depth analyses of the impact that the electronics industry as a whole has on 
+		the environment. Considering how ubiquitous it is, I'm suprised that technology's contribution to one of the most significant issues for our generation isn't more 
+		actively researched. <br><br>
+		As far as technical progress, I primarily spent my time with the basic functionality I had achieved last week and expanding that into a useful, abstracted C library 
+		for accessing the functionalities of the radio. Unfortunately, we still don't have an antenna for it, so I also researched antenna connectors and sent my findings to 
+		Peter, who ordered them on Friday. They are necessary to verify successful data transmission and reception. For now, I was able to map an interrupt called TXDone to
+		one of the DIO pins and verify that the pin was reset when a transmit began and then set again with the transmit buffer was successfully emptied. I was able to check 
+		this on the ADALM2000 but was unsuccessful in generating an interrupt to detect this instead. Shown below is a flowchart detailing my implementation for data transmission 
+		and the resulting line mapped to TXDone. TXDone will be a useful parameter, but the more important extension of this is the ability to set RXDone on DIO0 to an 
+		interrupt for when the LoRa gets data during normal operation.
+		<br><br>
 
+		<a href="../img/ckemmet_progress/TX Flow.png">	
+			<img src="../img/ckemmet_progress/TX Flow.png" style="height: 150px;"><br><b>Figure 1: </b><i>TX procudure and TXDone IRQ line</i></b></a>
+
+		<br><br>
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
