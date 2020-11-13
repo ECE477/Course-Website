@@ -330,6 +330,31 @@ contact course staff.
 				functions for parsing instead of using library assistance as before. This will also be done soon because my teammates have also had success 
 				with their individual components and we need to start integrating them together. 
 			</td>
+			<h4>Week 12:</h4>
+			<b>Date:</b> 11-13-2020<br>
+			<b>Total Hours:</b> 14<br>
+			<b>Description of design efrorts:</b><br>
+			<td>After this week, the work only work left to be done with the GPS is integration with the other components. I was able to successfully get data 
+				using interrupts that had previously not worked at all. 
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPS_Interrupt_GPGGA.jpg" style="width: 900px;"><br><b><u>Figure 1: Variable in System Workbench of interrupt data </u></b><br><br>
+				</td>
+			</table>
+			<td>The data received is stored in a string (dataTmp) and then split using a parsing function I created. The data is stored in a struct so that it can 
+				easily be accessed by the LoRa when triggered. There are several types of sentences that can be received from the GPS and the struct stores 
+				information from the "GPGGA" sentence.
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPGGA_struct.jpg" style="width: 400px;"><br><b><u>Figure 2: GPGGA struct </u></b><br><br>
+				</td>
+			</table>
+			<td>Next for the GPS is to integrate with the LoRa radio and the OLED to display data. Integration with the LoRa would have been attempted this 
+				week but the radio antenna did not arrive in time. After getting everything to work, I will also need to do some cleaning up in my code to create 
+				header files for the struct and parsing functions. 
+			</td>
 			<br><br>
 			<b>Sources Cited:</b><br>
 			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
