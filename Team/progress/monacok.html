@@ -500,6 +500,36 @@ contact course staff.
             <ul>
                 <li>Testing and construction of PCB</li>
             </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 13:</h4>
+            <b>Date:</b> 20 November 2020<br>
+            <b>Total hours:</b> 18<br>
+            <b>Description of design efforts:</b><br><br>
+
+            This week I worked on refining the main flow of the Snow-weAR Goggles' software. I programmed an external
+            interrupt handler for the system's session switch. The purpose of this switch is so that the user can begin
+            and end a session in which their metrics are calculated and displayed. Once the interrupt was tested, I
+            finalized the design of the session display and created a "Zero Stats" template that will also be shown
+            once the session switch is activated to indicate the beginning of a session. The shown statistics are speed
+            (upper-left), temperature (upper right), relative buddy location (lower left), and battery percentage
+            (lower right)<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Zero_Stats.png" style="width: 400px;"><br><b>Figure 32: </b><i>Zero Stats Display Design and Implementation</i></p><br>
+
+            I continued working with Mitchell to integrate the IMU into the main code, and later I worked with Peter to
+            integrate the GPS software. Additionally, I began testing the power traces on our PCBs and soldering some
+            of the power components including the voltage regulator, power and session switches, and respective
+            resistors and capacitors. The PCB in the picture below is an in-progress iteration. As most of our team is
+            less practiced with soldering, the microcontroller chip is proving difficult to solder without shorting some
+            of the pins and it continues to be a work in progress to remove these shorts.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Soldering_setup.jpg" style="width: 400px;"><br><b>Figure 33: </b><i>Soldering Station Setup with PCB</i></p><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Enjoy Thanksgiving Break :)</li>
+                <li>Provide software assistance virtually as needed</li>
+            </ul>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
