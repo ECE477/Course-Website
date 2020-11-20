@@ -355,7 +355,29 @@ contact course staff.
 				week but the radio antenna did not arrive in time. After getting everything to work, I will also need to do some cleaning up in my code to create 
 				header files for the struct and parsing functions. 
 			</td>
-			<br><br>
+			<h4>Week 13:</h4>
+			<b>Date:</b> 11-20-2020<br>
+			<b>Total Hours:</b> 16<br>
+			<b>Description of design efforts:</b><br>
+			<table>
+				<td>I worked with the GPS and OLED together and completed the integration of the two components. There was difficulty getting the GPS interrupt to work with 
+					the external GPIO interrupt to toggle the OLED because of differences in the code setups, but we now have code that has successfully merged the GPS, OLED, 
+					IMU, and battery babysitter together. 
+					<br><br>
+					This video shows the OLED being powered on and displaying GPS coordinate data once the session is started. In the code, the GPS data is contained a struct 
+					of floats and chars. This data can be accessed any time to be displayed by the OLED. Any of the other metrics can also be displayed, but I only included 
+					coordinates due to the lack of screen space. The screen will also update as coordinates change.
+					<br><br>
+					To allow transmission via radio, I added a function that converts location data to a decodable string. The LoRa is the last component to integrate to 
+					complete the project in dev board form.
+				</td><br>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="350px" controls>
+						<source src="../img/sumner3_progress/GPS_OLED_Integration.MOV" type=video/mp4>
+					</video> <br><b><u>Figure 1: GPS OLED Integration Test</u></b>
+				</td>
+			</table>
+			<br>
 			<b>Sources Cited:</b><br>
 			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
 				[2] "Ultimate GPS Module," Adafruit Industries. 2020. [Online] Available at: &lthttps://www.adafruit.com/product/790> [Accessed 8 September 2020].<br>
