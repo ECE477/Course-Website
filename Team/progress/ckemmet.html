@@ -354,6 +354,53 @@ contact course staff.
 			<img src="../img/ckemmet_progress/TX Flow.png" style="height: 150px;"><br><b>Figure 1: </b><i>TX procudure and TXDone IRQ line</i></b></a>
 
 		<br><br>
+
+
+		<h4>Week 13:</h4>
+		<b>Date:</b> November 20, 2020<br>
+		<b>Total hours:</b> 10:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		This week didn't start that optimistically, but by the end, I made some significant progress with the LoRa Transceiver and the STM32. The beginning of the week was rough,
+		because I encountered a lot of issues with integrating the LoRa SPI code with the rest of the program, namely the initiallizations for the IMU and the OLED. My first thought
+		was that the pins were conflicting, so I removed initializations for the other peripherals. When that didn't work, I tried reconfiguring the interrupts in the NVIC to prioritize
+		the system clock, then the SPI signals, then the interrupt for the RXDone signal. This didn't work either, so I began to work through clocking configurations. I didn't succeed in 
+		integrating this week. The plan for next week is to talk to Peter about how he managed to integrate his non-HAL peripheral and add in my components piece by piece.
+		<br><br>
+
+		<table>
+			<tr>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="400" controls>
+						<a href="https://www.youtube.com/watch?v=LZRCpYa-cSA"><iframe width="560" height="315" src="https://www.youtube.com/watch?v=LZRCpYa-cSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</video> <br><b><u>LoRa Sending and Receiving Data</u></b></a>
+
+				<td>The progress this week came from actually being able to verify successful signal reception and transmission. My setup included my single RFM95W module, and then 
+					two SX1276 LoRa modules on a ESP32 breakout. I found an Arduino library and used it to program the two ESP32 boards, verifying the communication with serial ports. I 
+					then borrowed my ex-roommate's Arduino Mega (which was under a table at my neighbor's house) to program the RFM95W and view Tx/Rx on that. Both of these configurations 
+					required referencing API's to find the correct pin out for software configuration and wiring. Once I was able to view basic functionality on the Arduino systems, I hooked 
+					the RFM95W up to the STM32 and ran my program.
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table>
+			<tr>
+				<td>Transmission was verified first and pretty much worked straight out. I made a few tweaks based on other implementations that made my program more robust. Up to 255 bytes can 
+					be transmitted, and we need less than 50 to transmit the necessary data in a single packet, which keeps things simple. For receiving, the first thing I did was to ensure that 
+					I was entering RX mode correctly by probing the DIO0 interrupt for the detection of the periodic packets coming from a nearby ESP32. Once I could see the interrupt, I added 
+					handling for the data to be read from the FIFO buffer on the LoRa chip. I used the scope to check that the bytes were the ones being sent, and was even able to re-transmit the 
+					data and receive it on the second ESP32.
+				</td>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<a href="../img/ckemmet_progress/Duke.jpg">	
+					<img src="../img/ckemmet_progress/Duke.jpg" style="height: 150px;"><br><b>Figure 2: Duke approves of my home lab </i></td>
+				</a>
+				<tr>
+		</table>
+		<br><br>
+
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
