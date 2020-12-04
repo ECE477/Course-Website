@@ -248,6 +248,159 @@ contact course staff.
 			</tr>
 		</table>
 		<br><br>
+
+		<h4>Week 9:</h4>
+		<b>Date:</b> October 23, 2020<br>
+		<b>Total hours:</b> 5:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		<table>
+			<tr><td>
+			This week, I spent a few hours working with the battery babysitter, Li-Ion battery, and the STM32l4. This was my first time interfacing with the L4 and so
+			setting up the environment and verifying proper functionality took some time. It paid off in the long run as development using STMCube was relatively easy,
+			and the included drivers come in handy as well.<br>
+			The first thing I did was get the battery charging correctly. I selected an input current of 100 mA and was able to successfully start charging the Li-Ion
+			battery. This was verified with the on-board blue LED on the batter babysitter. The datasheet claimed that it indicates successful charge. <br>
+			Next, I configured the I2C and LCD on the STM32L476G Discovery board. The LCD took quite a bit of finnagling and a call to Kennedy, but I eventually got it
+			working well enough to be able to tell that my I2C communication wasn't working at all.<br>
+			It's difficult to debug a signaling issue such as I2C outside of the lab, but I suspect that it's a problem with read/write data and not the firmware. The
+			firmware implementation closely follows the suggestions in STM32 source code. I am using the correct address and also am pretty sure that the requests and 
+			registers are accurate as well. I am currently consulting the bq27441-G1 fuel gauge datasheet to diagnose and fix the issue, but as of right now, I am not
+			 able to read registers on the battery babysitter yet.
+			</td>	</div></td><td>		
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/babysitter.jpg">	
+				<img src="../img/ckemmet_progress/babysitter.jpg" style="height: 400px;"><br><b>Figure 1: </b><i>Battery Babysitter, STM32, and Li-Ion battery</i></b></td>
+			</tr>
+		</table>
+
+		<h4>Week 10:</h4>
+		<b>Date:</b> October 30, 2020<br>
+		<b>Total hours:</b> 15:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		<table>
+			<tr><td>
+			I split my week between working with interfacing the battery babysitter (BQ27441) and the RFM95W module (SX1276) with the STM32 discovery board. I was 
+			unable to achieve success with either. For the battery babysitter, I first verified successful charging and discharging and then I began by reviewing the
+			 datasheet for any information relating to I2C protocol with the device. I then configured the STM32 I2C pins. I have been using the internal pullup resistors
+			 on the STM32, but next week I'm going to try with extermal 4.7kOhm resistors per the datasheet, and see if that helps. I then spent a lot of time trying to
+			 establish communcation with the device by successfully requesting data from the DEVICE_TYPE register. I verified this by using the on-board LCD.  I was unable
+			 to detect any successful signal. The development with the SX1276 chip went similarly except that I was using SPI, and I was more successful in finding Arduino 
+			 libraries for the application
+			</td>	</div></td><td>		
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/RFM95W.jpg">	
+				<img src="../img/ckemmet_progress/RFM95W.jpg" style="height: 200px;"><br><b>Figure 1: </b><i>RFM95W with STM32 Discovery Board</i></b></td>
+			</tr>
+		</table>
+		<br>
+		Miscellanious: <br>
+		I did a lot of tasks this week that, while pretty small alone, took up enough of my time that they're worth mentioning here. I printed off a 1:1 draft of the PCB
+		and verified that the battery babysitter pins will line up with the headers on the PCB. I also picked up some supplies from the lab and soldered headers onto my
+		RFM95W chip, so hopefully the connections will be more reliable in the future. I don't know if that was the issue or not, but it will be good to have that 
+		possibility ruled out.
+		<br><br>
+
+		<h4>Week 11:</h4>
+		<b>Date:</b> November 6, 2020<br>
+		<b>Total hours:</b> 10:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+		
+		<table>
+			<tr><td>
+			This week was dedicated to establishing communication with the LoRa transceiver module (RFM95W) via SPI protocol. Basic communcation was achieved, with the help 
+			of the ADALM2000 digital oscilliscope and Todd's office hours. After a few more hours wrestling with the HAL library, I ended up going back to square one and 
+			directly configuring the registers and parameters for SPI through the STMCubeIDE, using the L4 family reference manual. This was the first time I was able to get 
+			a decent clock signal, and after connecting the (newly soldered) transceiver module, I was able to verify the transmission and reception of bytes from the STM32L476 
+			Discovery Board. Pictured is a read request from register 2 of the SX1276 (the chip on the RFM95W) and the response which was verified with the data sheet. <br>
+			Next week, we'll start soldering the PCB. I plan on developing a robust LoRa library and then integrating it with Peter's GPS and maybe even Kennedy's OLED display 
+			(via breadboard, probably not on the PCB yet). 
+			</td>	</div>
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/SimpleSPI.jpg">	
+				<img src="../img/ckemmet_progress/SimpleSPI.jpg" style="height: 250px;"><br><b>Figure 1: </b><i>Successful SPI Transmit (1st byte) and Receive (2nd byte)</i></b></td>
+			<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+				<a href="../img/ckemmet_progress/SPISetup.jpg">	
+				<img src="../img/ckemmet_progress/SPISetup.jpg" style="height: 250px;"><br><b>Figure 1: </b><i>RFM95W with STM32 Discovery Board, Soldered Edition</i></b></td>
+			</tr>
+		</table>
+		<br><br>
+
+		<h4>Week 12:</h4>
+		<b>Date:</b> November 13, 2020<br>
+		<b>Total hours:</b> 8:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+		
+		This week, I was in charge of the Environmental and Ethical Analysis as well as continuing development with the LoRa transceiver module. The anaylsis is worth 
+		mentioning, even though it doesn't count as part of my 'progress' for this report. I really enjoyed researching the implications our project has for both the 
+		planet and the skiing experience. I learned that there really aren't that many in-depth analyses of the impact that the electronics industry as a whole has on 
+		the environment. Considering how ubiquitous it is, I'm suprised that technology's contribution to one of the most significant issues for our generation isn't more 
+		actively researched. <br><br>
+		As far as technical progress, I primarily spent my time with the basic functionality I had achieved last week and expanding that into a useful, abstracted C library 
+		for accessing the functionalities of the radio. Unfortunately, we still don't have an antenna for it, so I also researched antenna connectors and sent my findings to 
+		Peter, who ordered them on Friday. They are necessary to verify successful data transmission and reception. For now, I was able to map an interrupt called TXDone to
+		one of the DIO pins and verify that the pin was reset when a transmit began and then set again with the transmit buffer was successfully emptied. I was able to check 
+		this on the ADALM2000 but was unsuccessful in generating an interrupt to detect this instead. Shown below is a flowchart detailing my implementation for data transmission 
+		and the resulting line mapped to TXDone. TXDone will be a useful parameter, but the more important extension of this is the ability to set RXDone on DIO0 to an 
+		interrupt for when the LoRa gets data during normal operation.
+		<br><br>
+
+		<a href="../img/ckemmet_progress/TX Flow.png">	
+			<img src="../img/ckemmet_progress/TX Flow.png" style="height: 150px;"><br><b>Figure 1: </b><i>TX procudure and TXDone IRQ line</i></b></a>
+
+		<br><br>
+
+
+		<h4>Week 13:</h4>
+		<b>Date:</b> November 20, 2020<br>
+		<b>Total hours:</b> 10:00 <br>
+		<b><br>Description of design efforts:</b>
+		<br><br>
+
+		This week didn't start that optimistically, but by the end, I made some significant progress with the LoRa Transceiver and the STM32. The beginning of the week was rough,
+		because I encountered a lot of issues with integrating the LoRa SPI code with the rest of the program, namely the initiallizations for the IMU and the OLED. My first thought
+		was that the pins were conflicting, so I removed initializations for the other peripherals. When that didn't work, I tried reconfiguring the interrupts in the NVIC to prioritize
+		the system clock, then the SPI signals, then the interrupt for the RXDone signal. This didn't work either, so I began to work through clocking configurations. I didn't succeed in 
+		integrating this week. The plan for next week is to talk to Peter about how he managed to integrate his non-HAL peripheral and add in my components piece by piece.
+		<br><br>
+
+		<table>
+			<tr>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="400" controls>
+						<a href="https://www.youtube.com/watch?v=LZRCpYa-cSA"><iframe width="560" height="315" src="https://www.youtube.com/watch?v=LZRCpYa-cSA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					</video> <br><b><u>LoRa Sending and Receiving Data</u></b></a>
+
+				<td>The progress this week came from actually being able to verify successful signal reception and transmission. My setup included my single RFM95W module, and then 
+					two SX1276 LoRa modules on a ESP32 breakout. I found an Arduino library and used it to program the two ESP32 boards, verifying the communication with serial ports. I 
+					then borrowed my ex-roommate's Arduino Mega (which was under a table at my neighbor's house) to program the RFM95W and view Tx/Rx on that. Both of these configurations 
+					required referencing API's to find the correct pin out for software configuration and wiring. Once I was able to view basic functionality on the Arduino systems, I hooked 
+					the RFM95W up to the STM32 and ran my program.
+				</td>
+			</tr>
+		</table>
+		<br>
+		<table>
+			<tr>
+				<td>Transmission was verified first and pretty much worked straight out. I made a few tweaks based on other implementations that made my program more robust. Up to 255 bytes can 
+					be transmitted, and we need less than 50 to transmit the necessary data in a single packet, which keeps things simple. For receiving, the first thing I did was to ensure that 
+					I was entering RX mode correctly by probing the DIO0 interrupt for the detection of the periodic packets coming from a nearby ESP32. Once I could see the interrupt, I added 
+					handling for the data to be read from the FIFO buffer on the LoRa chip. I used the scope to check that the bytes were the ones being sent, and was even able to re-transmit the 
+					data and receive it on the second ESP32.
+				</td>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<a href="../img/ckemmet_progress/Duke.jpg">	
+					<img src="../img/ckemmet_progress/Duke.jpg" style="height: 150px;"><br><b>Figure 2: Duke approves of my home lab </i></td>
+				</a>
+				<tr>
+		</table>
+		<br><br>
+
 		<b>Sources Cited:</b><br>
 		<p style="line-height: 20px;">[1] LoRa-alliance.org. 2020. <i>LoRa Alliance.</i> [online] Available at: &lthttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>
 			[2] mbed.com. 2018. <i>ARM Mbed.</i> [online] Available at: &lthhttps://lora-alliance.org/sites/default/files/2018-04/what-is-lorawan.pdf> [Accessed 9 September 2020].<br>

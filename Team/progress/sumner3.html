@@ -246,6 +246,138 @@ contact course staff.
 				The next step for me is to actually use the STM32 microcontroller for the GPS implementation. I will be using the same hardware design with a push button 
 				to request data from the GPS. I anticipate that parsing to be more tedious moving from Python to C, but the process will hopefully go smoothly. 
 			</td><br><br>
+			<h4>Week 9:</h4>
+			<b>Date:</b> 10-23-2020<br>
+			<b>Total hours:</b> 6<br>
+			<b>Description of design efforts:</b><br>
+			<td>I was able to use the STM32L4 Discovery Board to work with the GPS module. A picture of the wiring with the discovery board is shown below in Figure 1. The pins used for 
+				UART TX and UART RX with the GPS are not what will be used in the final implementation of the project with the PCB. These pins will be used with the LoRa Radio, but 
+				the GPS pins we are using are not assigned a header pin on the discovery board. The pinout I used to generate the project for this test is shown in Figure 2.<br>
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/STM_GPS_Wiring.JPG" style="width: 440px;"><br><b><u>Figure 1: STM32L4 Discovery Board Wiring with GPS Module</u></b>
+					<br>
+				</td>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/STM_GPS_Pinout.jpg" style="width: 340px;"><br><b><u>Figure 2: STM32L4 Pinout for GPS Test</u></b>
+					<br>
+				</td>
+			</table>
+			<td>The actual code for the GPS is not terribly complex. I set up the micro to receive information from the chip and it is received in the NMEA format just like
+				in my previous methods. Parsing in C is more tedious and time consuming than with Python, but the process is pretty much the same. The comma separated 
+				structure makes it fairly easy to pull out the data.
+				<br><br>
+				The plan for the coming weeks with this part of the project is to begin integration with some of the other components that have been tested individually. 
+				We will likely test the GPS with the IMU first because the IMU is being used to calculate velocity, which is one of our PSSCs. Then the GPS will also be integrated 
+				with the LoRa radio so that we can implement the location data request feature.
+			</td>
+			<h4>Week 10:</h4>
+			<b>Date:</b> 10-29-2020<br>
+			<b>Total hours:</b> 8<br>
+			<b>Description of design efforts:</b><br>
+			<td>After having some progress with the STM32 and GPS last week, I feel like I made negative progress this week. The GPS uses UART 
+				communication which has several implementation methods in the STM32 software. I was using the polling protocol and was having some
+				success getting data from the GPS. This method doesn't work well at baud rates above 9600, which is the minimum baud rate of the GPS.
+				Using interrupt protocol will likely be better for working with the hardware and for our software setup. However, since I attempted to 
+				switch to using interrupts I now cannot not get any data from the GPS, even when I try to go back to using polling. I've spent a few days
+				trying to debug this but am currently stuck.
+				<br><br>
+				I'm pretty confident that I am initializing the GPS correctly as a USART device and correctly configuring the necessary GPIO pins. I have also
+				implemented handlers and initializers to enable the interrupts. 
+				<br><br>
+				This is the code for initizliaing the GPIO pins:
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/STM_GPIO_Init.jpg" style="width: 440px;"><br><b><u>Figure 1: STM32 function to initialize GPIO</u></b><br>
+				</td>
+			</table>
+			<td><br>This is the function that I'm calling for USART initialization:
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/STM_USART2_Init.jpg" style="width: 440px;"><br><b><u>Figure 2: STM32 function to initialize USART2</u></b><br>
+				</td>
+			</table>
+			<td>The USART configuration settings are the same that I used for working with the module on other devices. Once powered on and connected via 
+				the transmit pin on the module, the GPS will automatically begin transmitting location data so the STM shouldn't need to transmit anything 
+				to the GPS.
+				<br><br>
+				I'll keep trying to debug the issue over the weekend and if I'm still stuck my next step will be to find a time to go to office hours
+				next week. While searching the internet for a solution I found a potentially useful library for parsing the GPS data that would make my
+				life a lot easier once I am getting data [7]. 
+			</td>
+			<h4>Week 11:</h4>
+			<b>Date:</b> 11-6-2020<br>
+			<b>Total Hours:</b> 12<br>
+			<b>Description of design effors:</b><br>
+			<td>I was able to move through the roadblock last week working with the GPS and STM32. It took a few days for me to get components to 
+				communicate again and I'm not sure if there was just one issue or a combination of things. I changed several things in the debugging process 
+				and the issues were mainly with the code generated using the STMCubeMX software. Some of the HAL configuration files were setup incorrectly 
+				so I went through those and fixed the USART relevant functions. At one point I was also getting an error "Failed to execute MI command: -var 
+				create-" after changing nothing in my code. This ended up being a hardware malfunction with the board that was solved by rebooting and running 
+				my code with all the 'meat' commented out. Then I added it back in was able to run it fine.
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/SystemWorkbench_GPS_Polling_Data.jpg" style="width: 900px;"><br><b><u>Figure 1: Variable showing polled USART GPS data </u></b><br><br>
+				</td>
+			</table>
+			<td>Pictured above is a line of data captured from the GPS using UART polling. Before I was using functions from a GPS compatible library to do 
+				most of the data parsing, but to keep things simple I'm going to create my own parsing functions. At the moment I can only receive one line of 
+				data with each run, which will be the first thing I look into to fix into the weekend. To keep things simple, I'll also be creating my own 
+				functions for parsing instead of using library assistance as before. This will also be done soon because my teammates have also had success 
+				with their individual components and we need to start integrating them together. 
+			</td>
+			<h4>Week 12:</h4>
+			<b>Date:</b> 11-13-2020<br>
+			<b>Total Hours:</b> 14<br>
+			<b>Description of design efrorts:</b><br>
+			<td>After this week, the work only work left to be done with the GPS is integration with the other components. I was able to successfully get data 
+				using interrupts that had previously not worked at all. 
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPS_Interrupt_GPGGA.jpg" style="width: 900px;"><br><b><u>Figure 1: Variable in System Workbench of interrupt data </u></b><br><br>
+				</td>
+			</table>
+			<td>The data received is stored in a string (dataTmp) and then split using a parsing function I created. The data is stored in a struct so that it can 
+				easily be accessed by the LoRa when triggered. There are several types of sentences that can be received from the GPS and the struct stores 
+				information from the "GPGGA" sentence.
+			</td>
+			<table>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">
+					<img src="../img/sumner3_progress/GPGGA_struct.jpg" style="width: 400px;"><br><b><u>Figure 2: GPGGA struct </u></b><br><br>
+				</td>
+			</table>
+			<td>Next for the GPS is to integrate with the LoRa radio and the OLED to display data. Integration with the LoRa would have been attempted this 
+				week but the radio antenna did not arrive in time. After getting everything to work, I will also need to do some cleaning up in my code to create 
+				header files for the struct and parsing functions. 
+			</td>
+			<h4>Week 13:</h4>
+			<b>Date:</b> 11-20-2020<br>
+			<b>Total Hours:</b> 16<br>
+			<b>Description of design efforts:</b><br>
+			<table>
+				<td>I worked with the GPS and OLED together and completed the integration of the two components. There was difficulty getting the GPS interrupt to work with 
+					the external GPIO interrupt to toggle the OLED because of differences in the code setups, but we now have code that has successfully merged the GPS, OLED, 
+					IMU, and battery babysitter together. 
+					<br><br>
+					This video shows the OLED being powered on and displaying GPS coordinate data once the session is started. In the code, the GPS data is contained a struct 
+					of floats and chars. This data can be accessed any time to be displayed by the OLED. Any of the other metrics can also be displayed, but I only included 
+					coordinates due to the lack of screen space. The screen will also update as coordinates change.
+					<br><br>
+					To allow transmission via radio, I added a function that converts location data to a decodable string. The LoRa is the last component to integrate to 
+					complete the project in dev board form.
+				</td><br>
+				<td style="text-align: center; font-size: 10px; margin-bottom: 0px; padding-right: 10px; line-height: 15px;">	
+					<video width="350px" controls>
+						<source src="../img/sumner3_progress/GPS_OLED_Integration.MOV" type=video/mp4>
+					</video> <br><b><u>Figure 1: GPS OLED Integration Test</u></b>
+				</td>
+			</table>
+			<br>
 			<b>Sources Cited:</b><br>
 			<p style="line-height: 20px;">[1] "GPS Basics," sparkfun.com. 2020. [Online] Available at: &lthttps://learn.sparkfun.com/tutorials/gps-basics/all> [Accessed 9 September 2020].<br>
 				[2] "Ultimate GPS Module," Adafruit Industries. 2020. [Online] Available at: &lthttps://www.adafruit.com/product/790> [Accessed 8 September 2020].<br>
@@ -253,6 +385,7 @@ contact course staff.
 				[4] "Adafruit_GPS," GitHub. 2020. [Online] Available at: &lthttps://github.com/adafruit/Adafruit_GPS> [Accessed 16 September 2020]. <br>
 				[5] "NMEA Data," GPSInformation.org. [Online] Available at: &lthttps://www.gpsinformation.org/dale/nmea.htm#intro> [Accessed 16 September 2020]. <br>
 				[6] "Find Google Maps Coordinates," mapcoordiantes.net [Online] Available at: &lthttps://www.mapcoordinates.net/en> [Accessed 2 October 2020]. <br>  
+				[7] "nimaltd/GPS," GitHub. 2020. [Online] Available at: &lthttps://github.com/nimaltd/GPS [Accessed 27 October 2020]. <br>
 			</p>
         </div>
 

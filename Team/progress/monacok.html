@@ -337,6 +337,199 @@ contact course staff.
             </ul>
 
             <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 9:</h4>
+            <b>Date:</b> 23 October 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+
+            The majority of this week's focus was on making corrections to our Schematic based on our Midterm Review
+            feedback. I first added a note to our schematic indicating that our team intends to use software pull-ups
+            for our I2C lines. This was later redacted, and, although we still intend to use software pull-ups, I
+            placed physical pull-up resistors on the schematic to reduce the risk of overloading the software pull-up's
+            respective transistors.<br><br>
+            Next, I re-calculated the heat dissipation of our LT1129 Voltage Regulator to determine whether we would
+            require a heat sink on our PCB and, if so, the thermal resistance required. The LT1129 Datasheet provides
+            the following formula for calculating the voltage regulator's power dissipation:<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/LT1129_Heat_Formula.PNG" style="width: 300px;"><br><b>Figure 19: </b><i>LT1129 Power Dissipation Formula</i></p><br>
+            Our maximum output current for the component is approximately 0.38A which was found by summing the current
+            draw for each individual component, the values of which are summarized in the following chart taken from
+            our Electrical Overview document.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/ElecSpec_Overview.PNG" style="width: 400px;"><br><b>Figure 20: </b><i>Component Electrical Specifications Overview</i></p><br>
+            The maximum input voltage that could be sent to the regulator by the Battery Babysitter is under 4V as the
+            input to the Babysitter is a 3.7V Lithium Ion Battery. Our desired output voltage is 3.3V and the Ground
+            Pin Current is 0.02A as estimated from Figure 21 taken from the LT1129 datasheet. These values result in a
+            power dissipation of 0.345W. The Thermal Resistance of the component is about 60 degrees celsius per Watt
+            as estimated from Figure 22 taken from the LT1129 datasheet. The components power dissipation multiplied by
+            its thermal resistance gives the temperature rise above ambient. This value added to the assumed ambient
+            temperature of 25 degrees Celsius results in a maximum component temperature of 45.7 degrees Celsius.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/LT1129_GNDPin_Current.PNG" style="width: 200px;"><img src="../img/monacok_progress/LT1129_Heat_Chart.PNG" style="width: 400px; padding-left: 100px;"><br><b>Figure 21: </b><i>LT1129 Ground Pin Current</i><b style="padding-left: 250px;">Figure 22: </b><i>LT1129 Thermal Resistance Chart</i></p><br>
+            <table>
+                <tr>
+                    <td>While 45.7C is within our desired maximum temperature of 50C, I researched an inexpensive, easy-to-use, slip-on heat sink to be used if needed (Aavid Slide On 5801).</td>
+                    <td><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Aavid5801.PNG" style="width: 100px;"><br><b>Figure 23: </b><i>Aavid 5801 Slip-On Heat Sink</i></p><br></td>
+                </tr>
+            </table>
+            Our GPS Module is extremely low-power; however, the component does have a tight constraint for the
+            allowable input voltage ripple. To ensure the voltage input ripple is within spec, I looked into another
+            voltage regulator with minimal voltage dropout and adequate ripple rejection rating. I decided on the
+            TC2054 voltage regulator because it provides a dropout voltage less than 25mA for the current load of the
+            GPS module and has a typical power supply rejection rating (PSRR) of 50dB, which is more than enough for
+            our application. Since we are powering our device with a battery, the voltage ripple will likely be
+            negligible, so we will initially short the extra voltage regulator's Vin to Vout; however, if the Vin trace
+            picks up noise due to its proximity to another trace such as the SPI clock, the extra voltage regulator can
+            be used to reduce the voltage ripple.
+
+            <br><br>
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Design Home Screen</li>
+                <li>Continue working on Software Development</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 10:</h4>
+            <b>Date:</b> 30 October 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+
+            This week I finished creating the Home Screen design for the Snow-weAR Goggles Transparent OLED Display and
+            created a function to display the design. The design consists of a logo depicting snow goggles reflecting
+            the view of a mountain range and the product name. In order to display the logo, I first had to determine the coordinate values
+            of the black pixels in the logo. Using a python script, I resized the logo image to better fit the 56x128
+            display, then I used the numpy library to extract the coordinate values of pixels whose values were below a
+            defined threshold value. The thershold value was adjusted until all of the desired pixels were selected by
+            the program. The coordinate values were then saved into a separate file where I could copy the points over
+            to system workbench. Finally, I looped through all of the x, y coordinates and used the DrawPixel library
+            function to display the final logo on the OLED Display. The name of the product is displayed one character
+            at a time with 0.1s delay between updates to create animation. The final design is shown below.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/OLED_Logo.jpg" style="width: 300px;"><br><b>Figure 24: </b><i>Snow-weAR Home Screen</i></p><br>
+
+            Towards the end of the week I began working with one of our Battery Babysitter modules to figure out how to
+            communicate with the on board Fuel Gauge to retrieve current battery level status. I was able to find a
+            github repository that had taken the BQ27441 Arduino library and converted the files into a C compatible
+            library. I added the C library files to our project software and have begun working with the library.
+            Unfortunately, I have been unable to communicate with the Battery Babysitter using the original C library;
+            however, I am now attempting to edit the library to use HAL I2C interfacing to see whether that will solve
+            the communication issues. I have high hopes that I will be able to obtain the required information from the module
+            in the upcoming week.<br><br>
+
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Setup.jpg" style="width: 300px;"><br><b>Figure 25: </b><i>Battery Babysitter Test Set-up</i></p><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Communicate with Battery Babysitter</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 11:</h4>
+            <b>Date:</b> 6 November 2020<br>
+            <b>Total hours:</b> 10<br>
+            <b>Description of design efforts:</b><br><br>
+
+            After unsuccessful attempts at communicating with the Battery Babysitter Fuel Gauge, I attended Todd Wild's
+            office hours and learned how to properly read and write I2C messages using the Protocol tab of the WaveForm
+            application with the Analog Discovery 2 (AD2). Using the AD2, I later attempted to determine the correct
+            command to send to the device to retrieve the Battery Babysitter's Fuel Gauge "Device Type" value. According
+            to the Battery Fuel Gauge Technical Reference Manual, the Device Type can be obtained by writing a
+            subcommand to the Control Register which will cause the device to then write the Device Type to the Control
+            Register address to be read by the Master. The Control Register has address 0x00 and 0x01 while the
+            subcommand for obtaining the Device Type is 0x0001 as shown in the portion of the Reference Manual included
+            below.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_DeviceTypeManual.jpg" style="width: 700px;"><br><b>Figure 26: </b><i>Battery Babysitter Fuel Gauge Technical Reference Manual Control Register</i></p><br>
+
+            After sending the Device Type subcommand to the Control Register, the Fuel Gauge returns the value 0x0421
+            (the default Device Type Value) to 0x00 and 0x01. Unfortunately, I was unable to receive the correct Device
+            Type value for the majority of this week using the AD2. In fact, it seemed that each time I wrote to the
+            Control Register, I received different values almost every time. I then decided to try logging the I2C
+            messages to see what my current C code was sending to the Battery Babysitter for comparison. I realized
+            that the reason I was not receiving the correct output when sending I2C messages from the AD2 was that I
+            was using big endian format while the Battery Babysitter (and the HAL I2C function I was using) used little
+            endian. Finally, I discovered that my use of the HAL Library function was also wrong in the fact that I was
+            sending too many bytes to the Fuel Gauge register. After researching more into the HAL library,
+            which I intend to actually use to communicate with the Battery Babysitter via the STM32, I came across a
+            discussion that suggested using the parameter I2C_MEMADD_SIZE_8BIT for the Memory Address variable in the
+            HAL function HAL_I2C_Mem_Write(). The following AD2 Log snippet shows the results of this minor fix.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/AD2_Log.jpg" style="width: 500px;"><br><b>Figure 27: </b><i>Correct Device Type Value received from Battery Babysitter Fuel Gauge logged with WaveForms using an AD2</i></p><br>
+
+            Once I was positive I could correctly connect to and communicate with the Battery Babysitter Fuel Gauge, I
+            adapted more of the C library (derived from the BQ27441 Arduino library) to correctly read the LiPo Battery
+            Voltage, Capacity Status, and Temperature Sensor values. These read functions and all other communication
+            can now be easily implemented with the I2C read/write functions I created using the HAL Library.<br><br>
+
+            Below are two images showing more results from the Battery Babysitter Fuel Gauge communication testing.<br><br>
+
+            <table style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td style="padding-right: 120px;"><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Voltage.jpg" style="height: 400px;"><br><b>Figure 28: </b><i>OLED Display indicates proper connection to the <br>Battery Babysitter and reports the LiPo Battery Voltage</i></p><br></td>
+                    <td><p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_Output.jpg" style="height: 400px;"><br><b>Figure 29: </b><i>Voltage Supply output of the Battery Babysitter<br>measured with DMM</i></p><br></td>
+                </tr>
+            </table>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Begin testing and construction of PCB</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 12:</h4>
+            <b>Date:</b> 13 November 2020<br>
+            <b>Total hours:</b> 8<br>
+            <b>Description of design efforts:</b><br><br>
+
+            My first goal this week was to finish adapting the Battery Babysitter Fuel Gauge library for our project.
+            All functions and declarations have been successfully imported into our project as a single source file and
+            two header files. The functions defined in the source file can be easily called by the main program and
+            their return values displayed to the OLED with little to no extra calculations. Some formatting is required
+            to neatly show float values such as that of the Battery Babysitter Voltage reading.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/BB_CodeExample.jpg" style="width: 500px;"><br><b>Figure 30: </b><i>Reading Battery Voltage and Temperature then displaying the values of the Transparent OLED Display</i></p><br>
+
+            I was also able to work briefly with Mitchell to integrate the IMU code with the Battery Babysitter and
+            OLED display. Fortunately, the IMU and OLED breakout boards both have Qwiic connector ports, so the two
+            components can be daisy-chained on the same I2C line for simple wiring.
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Qwiic_Daisy.jpg" style="width: 400px;"><br><b>Figure 31: </b><i>Qwiic Connectors Daisy Chain Example (Actual set-up image not currently available)</i></p><br>
+
+            Finally, I practiced soldering jumper pads and some fly wiring to re-configure one of our OLED displays for
+            I2C and to test a voltage regulator component with my breadboard set-up. I did not get the chance to
+            photograph this process.<br><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Testing and construction of PCB</li>
+            </ul>
+
+            <hr style="width: 70%; color: black; text-align: center; display: block; height: 1px; background-color: black; border: 0; margin-top: 40px; margin-bottom: 40px;">
+
+            <h4>Week 13:</h4>
+            <b>Date:</b> 20 November 2020<br>
+            <b>Total hours:</b> 18<br>
+            <b>Description of design efforts:</b><br><br>
+
+            This week I worked on refining the main flow of the Snow-weAR Goggles' software. I programmed an external
+            interrupt handler for the system's session switch. The purpose of this switch is so that the user can begin
+            and end a session in which their metrics are calculated and displayed. Once the interrupt was tested, I
+            finalized the design of the session display and created a "Zero Stats" template that will also be shown
+            once the session switch is activated to indicate the beginning of a session. The shown statistics are speed
+            (upper-left), temperature (upper right), relative buddy location (lower left), and battery percentage
+            (lower right)<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Zero_Stats.png" style="width: 400px;"><br><b>Figure 32: </b><i>Zero Stats Display Design and Implementation</i></p><br>
+
+            I continued working with Mitchell to integrate the IMU into the main code, and later I worked with Peter to
+            integrate the GPS software. Additionally, I began testing the power traces on our PCBs and soldering some
+            of the power components including the voltage regulator, power and session switches, and respective
+            resistors and capacitors. The PCB in the picture below is an in-progress iteration. As most of our team is
+            less practiced with soldering, the microcontroller chip is proving difficult to solder without shorting some
+            of the pins and it continues to be a work in progress to remove these shorts.<br><br>
+            <p style="text-align: center; font-size: 10px; line-height: 15px;"><img src="../img/monacok_progress/Soldering_setup.jpg" style="width: 400px;"><br><b>Figure 33: </b><i>Soldering Station Setup with PCB</i></p><br>
+
+            <b>Next Week Plan:</b><br>
+            <ul>
+                <li>Enjoy Thanksgiving Break :)</li>
+                <li>Provide software assistance virtually as needed</li>
+            </ul>
         </div>
 	
 		<!-- Instantiate global footer. Any changes to the footer should be made through the top-level file "footer.html" -->
